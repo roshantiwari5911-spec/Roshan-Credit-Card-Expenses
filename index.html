@@ -2,8 +2,8 @@
         const SUPABASE_URL = "https://tcxmvximermofhnbvvtg.supabase.co"; 
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjeG12eGltZXJtb2ZobmJ2dnRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNjU4MzQsImV4cCI6MjA5Njk0MTgzNH0.YfgxM4CyAoByA3QGJaBqxK6coVU0p7Rg6AJFTG0ZaHQ";
 
-        // Changed variable name here to prevent the declaration collision
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let supabaseClient;
+        let transactions = [];
 
         const cardsBlueprint = {
             "HDFC": { limit: 103000, theme: "from-blue-600 to-indigo-900" },
@@ -13,8 +13,6 @@
             "One Card": { limit: 5000, theme: "from-neutral-700 to-neutral-900" },
             "Axis Bank": { limit: 56000, theme: "from-purple-800 to-indigo-950" }
         };
-
-        let transactions = [];
 
         function showToast(message) {
             const toast = document.getElementById("sync-toast");
@@ -31,7 +29,7 @@
         const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
 
         async function fetchCloudData() {
-            // Using the new unique client variable
+            if (!supabaseClient) return;
             const { data, error } = await supabaseClient.from('transactions').select('*');
             if (error) { console.error(error); return; }
             transactions = data || [];
@@ -108,7 +106,6 @@
             };
 
             showToast("Syncing with cloud ecosystem...");
-            // Using the new unique client variable
             const { error } = await supabaseClient.from('transactions').insert([newTx]);
             if (error) { alert("Cloud upload failed"); return; }
             
@@ -118,7 +115,6 @@
 
         async function deleteCloudTransaction(id) {
             showToast("Purging ledger row...");
-            // Using the new unique client variable
             const { error } = await supabaseClient.from('transactions').delete().eq('id', id);
             if(error) { alert("Delete failed"); return; }
             fetchCloudData();
@@ -126,6 +122,14 @@
 
         document.getElementById("search-ledger").addEventListener("input", (e) => { renderLedger(e.target.value); lucide.createIcons(); });
         document.getElementById("tx-date").value = new Date().toISOString().split('T')[0];
-        
-        fetchCloudData();
+
+        // Safely initialize after all CDNs are verified loaded
+        window.addEventListener('load', () => {
+            if (window.supabase && typeof window.supabase.createClient === 'function') {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                fetchCloudData();
+            } else {
+                console.error("Supabase CDN failed to load properly.");
+            }
+        });
     </script>
