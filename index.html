@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Roshan's Expenses</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -42,21 +42,22 @@
             transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
+
+        /* Custom Scrollbar for sleek mobile ledger scanning */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
     </style>
 </head>
 <body class="min-h-screen antialiased pb-12 select-none">
 
-    <!-- 🔒 DESIGNER LOGIN ENVIRONMENT WITH EXPERIMENTAL ANIMATION BACKGROUND -->
     <div id="login-overlay" class="fixed inset-0 z-[100] ambient-canvas bg-[#050507] flex items-center justify-center p-4 transition-opacity duration-500">
         
-        <!-- 🌌 DYNAMIC VECTOR FIELD LAYER -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <!-- Ambient Glow Orbs -->
-            <div class="absolute w-[600px] h-[600px] rounded-full bg-blue-900/10 blur-[150px] -top-40 -left-40 animate-pulse" style="animation-duration: 8s;"></div>
-            <div class="absolute w-[500px] h-[500px] rounded-full bg-amber-900/10 blur-[130px] -bottom-20 right-10 animate-pulse" style="animation-duration: 12s;"></div>
+            <div class="absolute w-[300px] md:w-[600px] h-[300px] md:h-[600px] rounded-full bg-blue-900/10 blur-[100px] md:blur-[150px] -top-20 md:-top-40 -left-20 md:-left-40 animate-pulse" style="animation-duration: 8s;"></div>
+            <div class="absolute w-[250px] md:w-[500px] h-[250px] md:h-[500px] rounded-full bg-amber-900/10 blur-[90px] md:blur-[130px] -bottom-10 md:-bottom-20 right-5 md:right-10 animate-pulse" style="animation-duration: 12s;"></div>
             
-            <!-- 💳 ROTATIONAL TITANIUM CREDIT CARD -->
-            <div id="anchor-card" class="kinetic-metal-card absolute w-[420px] h-[260px] rounded-2xl p-6 hidden md:flex flex-col justify-between left-[12%] top-[28%] metal-brushed overflow-hidden">
+            <div id="anchor-card" class="kinetic-metal-card absolute w-[420px] h-[260px] rounded-2xl p-6 hidden lg:flex flex-col justify-between left-[12%] top-[28%] metal-brushed overflow-hidden">
                 <div class="absolute inset-0 holo-specular"></div>
                 <div class="relative z-10 flex justify-between items-start">
                     <div class="w-12 h-10 rounded-lg bg-gradient-to-br from-amber-400/30 to-amber-600/10 border border-amber-400/20 shadow-inner flex items-center justify-center">
@@ -79,21 +80,18 @@
                 </div>
             </div>
 
-            <!-- 🛫 INTERACTIVE TRAVEL/FLIGHT PRISM -->
             <div id="vector-flight" class="floating-vector hidden lg:block left-[60%] top-[15%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
                 <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="plane" class="w-6 h-6 text-blue-400/40"></i>
                     <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">ZAPS Airways</p><p class="text-xs font-medium text-white/70 font-mono">RT-782 LAX</p></div>
                 </div>
             </div>
 
-            <!-- 🛒 PARALLAX WIREFRAME GROCERY SYSTEM -->
             <div id="vector-cart" class="floating-vector hidden lg:block left-[75%] top-[55%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
                 <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="shopping-cart" class="w-6 h-6 text-emerald-400/40"></i>
                     <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">Premium Ledger</p><p class="text-xs font-medium text-white/70 font-mono">Roshan Tiwari</p></div>
                 </div>
             </div>
 
-            <!-- ⛽ KINETIC FUEL/TELEMETRY PRISM -->
             <div id="vector-fuel" class="floating-vector hidden lg:block left-[20%] top-[72%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
                 <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="fuel" class="w-6 h-6 text-amber-400/40"></i>
                     <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">1.6 TDI Fuel Telemetry</p><p class="text-xs font-medium text-white/70 font-mono">Verified Admin</p></div>
@@ -101,8 +99,7 @@
             </div>
         </div>
 
-        <!-- 🍎 TOP DESIGNER GLASS INTERFACE GATEWAY -->
-        <div class="apple-glass rounded-3xl p-8 max-w-sm w-full space-y-6 shadow-2xl relative z-50 transform hover:scale-[1.01] transition-transform duration-300">
+        <div class="apple-glass rounded-3xl p-6 md:p-8 max-w-sm w-full space-y-6 shadow-2xl relative z-50 transform hover:scale-[1.01] transition-transform duration-300 mx-4">
             <div class="text-center space-y-2">
                 <div class="mx-auto w-12 h-12 bg-white text-black rounded-2xl flex items-center justify-center shadow-xl shadow-white/5"><i data-lucide="fingerprint" class="w-6 h-6 text-neutral-900"></i></div>
                 <h2 class="text-xl font-bold text-white tracking-tight">Cloud Suite Terminal</h2>
@@ -111,100 +108,100 @@
             <form id="login-form" class="space-y-4">
                 <div>
                     <label class="block text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Email Terminal ID</label>
-                    <input type="email" id="login-email" required placeholder="name@domain.com" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600">
+                    <input type="email" id="login-email" required placeholder="name@domain.com" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600 h-11">
                 </div>
                 <div>
                     <label class="block text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Secure Password</label>
-                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600">
+                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600 h-11">
                 </div>
-                <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-bold text-sm py-3.5 rounded-xl transition-all shadow-lg shadow-white/5 active:scale-[0.99] flex items-center justify-center gap-2 mt-2">Verify Credentials</button>
+                <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-bold text-sm py-3.5 rounded-xl transition-all shadow-lg shadow-white/5 active:scale-[0.99] flex items-center justify-center gap-2 mt-2 h-11">Verify Credentials</button>
             </form>
         </div>
     </div>
 
-    <!-- 🌐 LIVE DASHBOARD SUITE (Hidden until Auth passes) -->
     <div id="app-content" class="hidden opacity-0 transition-opacity duration-500">
         <div id="sync-toast" class="fixed bottom-6 right-6 z-50 bg-neutral-900 border border-white/10 text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transition-all opacity-0 pointer-events-none translate-y-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span id="toast-msg" class="text-neutral-300 font-medium">Syncing...</span>
         </div>
 
-        <header class="sticky top-0 z-50 apple-glass border-b border-white/5 px-6 py-4 mb-8">
+        <header class="sticky top-0 z-50 apple-glass border-b border-white/5 px-4 md:px-6 py-4 mb-6 md:mb-8">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-amber-500 text-black p-2 rounded-xl flex items-center justify-center shadow-lg"><i data-lucide="wallet" class="w-5 h-5"></i></div>
+                <div class="flex items-center gap-2.5 md:get-3">
+                    <div class="bg-amber-500 text-black p-1.5 md:p-2 rounded-xl flex items-center justify-center shadow-lg"><i data-lucide="wallet" class="w-4 h-4 md:w-5 md:h-5"></i></div>
                     <div>
-                        <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">Roshan's Expenses</h1>
-                        <p class="text-xs text-neutral-400 font-medium tracking-wide">SECURE SUITE</p>
+                        <h1 class="text-base md:text-xl font-bold tracking-tight bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">Roshan's Expenses</h1>
+                        <p class="text-[9px] md:text-xs text-neutral-400 font-medium tracking-wide">SECURE SUITE</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="text-sm text-neutral-400 bg-neutral-900/60 border border-white/5 px-4 py-2 rounded-full flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Protected Sync
+                <div class="flex items-center gap-2 md:gap-4">
+                    <div class="text-[11px] md:text-sm text-neutral-400 bg-neutral-900/60 border border-white/5 px-2.5 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> <span class="hidden sm:inline">Protected Sync</span><span class="sm:hidden">Live</span>
                     </div>
-                    <button onclick="handleLogout()" class="text-xs text-neutral-400 hover:text-red-400 bg-white/5 border border-white/5 hover:bg-red-500/10 px-3 py-2 rounded-full transition-all">Sign Out</button>
+                    <button onclick="handleLogout()" class="text-[11px] md:text-xs text-neutral-400 hover:text-red-400 bg-white/5 border border-white/5 hover:bg-red-500/10 px-2.5 md:px-3 py-1.5 md:py-2 rounded-full transition-all">Sign Out</button>
                 </div>
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
-                    <div><p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Assigned Credit</p><h3 class="text-3xl font-bold text-white" id="total-limit">₹5,23,000</h3></div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="apple-glass rounded-2xl p-5 md:p-6 flex items-center justify-between">
+                    <div><p class="text-[10px] md:text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Assigned Credit</p><h3 class="text-2xl md:text-3xl font-bold text-white" id="total-limit">₹5,23,000</h3></div>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400"><i data-lucide="shield-check" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                 </div>
-                <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
-                    <div><p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Net Expenses</p><h3 class="text-3xl font-bold text-amber-400" id="total-expenses">₹0</h3></div>
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
+                <div class="apple-glass rounded-2xl p-5 md:p-6 flex items-center justify-between">
+                    <div><p class="text-[10px] md:text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Net Expenses</p><h3 class="text-2xl md:text-3xl font-bold text-amber-400" id="total-expenses">₹0</h3></div>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400"><i data-lucide="activity" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                 </div>
-                <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
-                    <div><p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Available Balance</p><h3 class="text-3xl font-bold text-emerald-400" id="total-available">₹5,23,000</h3></div>
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400"><i data-lucide="sparkles" class="w-6 h-6"></i></div>
+                <div class="apple-glass rounded-2xl p-5 md:p-6 sm:col-span-2 md:col-span-1 flex items-center justify-between">
+                    <div><p class="text-[10px] md:text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Available Balance</p><h3 class="text-2xl md:text-3xl font-bold text-emerald-400" id="total-available">₹5,23,000</h3></div>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400"><i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                 </div>
             </div>
 
             <section>
-                <div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold tracking-tight text-white flex items-center gap-2"><i data-lucide="credit-card" class="w-4 h-4 text-neutral-400"></i> Portfolio Cards</h2><span class="text-xs text-neutral-400">6 Cards Registered</span></div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-grid"></div>
+                <div class="flex items-center justify-between mb-4"><h2 class="text-base md:text-lg font-semibold tracking-tight text-white flex items-center gap-2"><i data-lucide="credit-card" class="w-4 h-4 text-neutral-400"></i> Portfolio Cards</h2><span class="text-[11px] md:text-xs text-neutral-400">6 Registered</span></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="cards-grid"></div>
             </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <section class="lg:col-span-4 apple-glass rounded-2xl p-6 space-y-6 sticky top-28">
-                    <div><h2 class="text-lg font-semibold tracking-tight text-white">Log Entry</h2><p class="text-xs text-neutral-400">Updates instantly across all mobile & desktop assets</p></div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+                <section class="lg:col-span-4 apple-glass rounded-2xl p-5 md:p-6 space-y-5 md:space-y-6 lg:sticky lg:top-28">
+                    <div><h2 class="text-base md:text-lg font-semibold tracking-tight text-white">Log Entry</h2><p class="text-xs text-neutral-400">Updates instantly across all mobile & desktop assets</p></div>
                     <form id="transaction-form" class="space-y-4">
                         <div>
-                            <label class="block text-xs font-medium text-neutral-300 mb-2">Select Card</label>
-                            <select id="tx-card" required class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                            <label class="block text-xs font-medium text-neutral-300 mb-1.5">Select Card</label>
+                            <select id="tx-card" required class="w-full bg-neutral-900/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors h-11">
                                 <option value="HDFC">HDFC Bank</option><option value="IDFC">IDFC First Bank</option><option value="Super Money">Super Money</option><option value="ICICI">ICICI Bank</option><option value="One Card">One Card</option><option value="Axis Bank">Axis Bank</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-neutral-300 mb-2">Amount (₹)</label>
-                            <div class="relative"><span class="absolute left-4 top-3 text-neutral-500 text-sm">₹</span><input type="number" id="tx-amount" step="any" placeholder="e.g. 1500 or -5000" required class="w-full bg-neutral-900 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors"></div>
+                            <label class="block text-xs font-medium text-neutral-300 mb-1.5">Amount (₹)</label>
+                            <div class="relative"><span class="absolute left-4 top-3 text-neutral-500 text-sm">₹</span><input type="number" id="tx-amount" step="any" placeholder="e.g. 1500 or -5000" required class="w-full bg-neutral-900/80 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors h-11"></div>
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-neutral-300 mb-2">Transaction Date</label>
-                            <input type="date" id="tx-date" required class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                            <label class="block text-xs font-medium text-neutral-300 mb-1.5">Transaction Date</label>
+                            <input type="date" id="tx-date" required class="w-full bg-neutral-900/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors h-11">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-neutral-300 mb-2">Description</label>
-                            <input type="text" id="tx-desc" placeholder="e.g., Apple Store, Flight Ticket" required class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors">
+                            <label class="block text-xs font-medium text-neutral-300 mb-1.5">Description</label>
+                            <input type="text" id="tx-desc" placeholder="e.g., Apple Store, Flight Ticket" required class="w-full bg-neutral-900/80 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors h-11">
                         </div>
-                        <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-semibold text-sm py-3 rounded-xl transition-all shadow-lg active:scale-[0.99] mt-2 flex items-center justify-center gap-2"><i data-lucide="cloud-lightning" class="w-4 h-4"></i> Sync Transaction</button>
+                        <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-semibold text-sm rounded-xl transition-all shadow-lg active:scale-[0.99] mt-2 flex items-center justify-center gap-2 h-11"><i data-lucide="cloud-lightning" class="w-4 h-4"></i> Sync Transaction</button>
                     </form>
                 </section>
 
-                <section class="lg:col-span-8 apple-glass rounded-2xl overflow-hidden flex flex-col min-h-[520px]">
-                    <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div><h2 class="text-lg font-semibold tracking-tight text-white">Cloud Ledger</h2><p class="text-xs text-neutral-400">Live operational data sync telemetry</p></div>
-                        <div class="relative"><i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-neutral-500"></i><input type="text" id="search-ledger" placeholder="Filter descriptions..." class="bg-neutral-900 border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-500 w-full sm:w-64 transition-all"></div>
+                <section class="lg:col-span-8 apple-glass rounded-2xl overflow-hidden flex flex-col min-h-[400px] md:min-h-[520px]">
+                    <div class="p-5 md:p-6 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div><h2 class="text-base md:text-lg font-semibold tracking-tight text-white">Cloud Ledger</h2><p class="text-xs text-neutral-400">Live operational data sync telemetry</p></div>
+                        <div class="relative w-full sm:w-auto"><i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-neutral-500"></i><input type="text" id="search-ledger" placeholder="Filter descriptions..." class="bg-neutral-900/80 border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-500 w-full sm:w-64 transition-all h-9"></div>
                     </div>
+                    
                     <div class="overflow-x-auto flex-1">
-                        <table class="w-full text-left border-collapse">
+                        <table class="w-full text-left border-collapse min-w-[600px] sm:min-w-0">
                             <thead>
-                                <tr class="border-b border-white/5 bg-neutral-900/30 text-[11px] uppercase tracking-wider text-neutral-400 font-semibold"><th class="py-4 px-6">Timeline Date</th><th class="py-4 px-6">Card Destination</th><th class="py-4 px-6">Description</th><th class="py-4 px-6 text-right">Value Amount</th><th class="py-4 px-6 text-center">Action</th></tr>
+                                <tr class="border-b border-white/5 bg-neutral-900/30 text-[10px] md:text-[11px] uppercase tracking-wider text-neutral-400 font-semibold"><th class="py-4 px-4 md:px-6">Timeline Date</th><th class="py-4 px-4 md:px-6">Card</th><th class="py-4 px-4 md:px-6">Description</th><th class="py-4 px-4 md:px-6 text-right">Value Amount</th><th class="py-4 px-4 md:px-6 text-center">Action</th></tr>
                             </thead>
-                            <tbody id="ledger-body" class="divide-y divide-white/5 text-sm"></tbody>
+                            <tbody id="ledger-body" class="divide-y divide-white/5 text-xs md:text-sm"></tbody>
                         </table>
                         <div id="empty-state" class="hidden p-12 text-center flex flex-col items-center justify-center text-neutral-500 space-y-2"><i data-lucide="cloud-off" class="w-8 h-8 text-neutral-600"></i><p class="text-sm">No authorization records found on this scope.</p></div>
                     </div>
@@ -241,7 +238,12 @@
             const formatted = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(absoluteVal);
             return val < 0 ? `-${formatted}` : formatted;
         };
-        const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        const formatDate = (dateStr) => {
+            const d = new Date(dateStr);
+            return window.innerWidth < 640 
+                ? d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })
+                : d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        };
 
         async function fetchCloudData() {
             const { data, error } = await supabaseClient.from('transactions').select('*');
@@ -266,14 +268,14 @@
                 totalLimit += metadata.limit; totalExpenses += spent;
 
                 cardsGrid.insertAdjacentHTML("beforeend", `
-                    <div class="apple-card-gradient rounded-2xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                    <div class="apple-card-gradient rounded-2xl p-5 flex flex-col justify-between shadow-xl relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-br ${metadata.theme} opacity-10 group-hover:opacity-15 transition-opacity duration-300"></div>
                         <div class="relative z-10 space-y-4">
                             <div class="flex items-center justify-between"><span class="text-xs font-semibold uppercase tracking-widest text-neutral-400">${cardName}</span><i data-lucide="credit-card" class="w-4 h-4 text-neutral-500"></i></div>
-                            <div><p class="text-[10px] text-neutral-400 uppercase tracking-wider mb-0.5">Available Balance</p><h4 class="text-xl font-bold ${available < 0 ? 'text-red-400' : 'text-white'}">${formatCurrency(available)}</h4></div>
+                            <div><p class="text-[9px] text-neutral-400 uppercase tracking-wider mb-0.5">Available Balance</p><h4 class="text-lg md:text-xl font-bold ${available < 0 ? 'text-red-400' : 'text-white'}">${formatCurrency(available)}</h4></div>
                             <div class="space-y-1.5">
                                 <div class="w-full bg-white/10 rounded-full h-1 overflow-hidden"><div class="h-full rounded-full transition-all duration-500 ${allocationPercentage > 85 ? 'bg-red-500' : 'bg-emerald-400'}" style="width: ${allocationPercentage}%"></div></div>
-                                <div class="flex justify-between text-[11px] text-neutral-400"><span>Spent: ${formatCurrency(spent)}</span><span>Limit: ${formatCurrency(metadata.limit)}</span></div>
+                                <div class="flex justify-between text-[10px] text-neutral-400"><span>Spent: ${formatCurrency(spent)}</span><span>Limit: ${formatCurrency(metadata.limit)}</span></div>
                             </div>
                         </div>
                     </div>`);
@@ -298,13 +300,13 @@
                 filtered.forEach(tx => {
                     const isCredit = parseFloat(tx.amount) < 0; const displayAmt = formatCurrency(tx.amount);
                     const row = document.createElement("tr");
-                    row.className = "hover:bg-white/[0.02] transition-colors duration-150 group";
+                    row.className = "hover:bg-white/[0.02] transition-colors duration-150 group text-xs md:text-sm";
                     row.innerHTML = `
-                        <td class="py-4 px-6 text-neutral-300 font-medium">${formatDate(tx.date)}</td>
-                        <td class="py-4 px-6"><span class="bg-white/5 border border-white/5 px-2.5 py-1 rounded-md text-xs font-medium text-neutral-200">${tx.card}</span></td>
-                        <td class="py-4 px-6 text-neutral-400 max-w-xs truncate flex items-center gap-2">${tx.description} ${isCredit ? '<span class="bg-emerald-500/10 text-emerald-400 text-[9px] px-1.5 py-0.5 rounded border border-emerald-500/20 font-medium tracking-wide uppercase">Payment/Refund</span>' : ''}</td>
-                        <td class="py-4 px-6 text-right font-semibold ${isCredit ? 'text-emerald-400' : 'text-white'}">${isCredit ? displayAmt.replace('-', '+ ') : displayAmt}</td>
-                        <td class="py-4 px-6 text-center"><button onclick="deleteCloudTransaction('${tx.id}')" class="text-neutral-600 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100 duration-150"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>`;
+                        <td class="py-3.5 px-4 md:px-6 text-neutral-300 font-medium whitespace-nowrap">${formatDate(tx.date)}</td>
+                        <td class="py-3.5 px-4 md:px-6"><span class="bg-white/5 border border-white/5 px-2 py-0.5 rounded text-[11px] font-medium text-neutral-200">${tx.card}</span></td>
+                        <td class="py-3.5 px-4 md:px-6 text-neutral-400 max-w-[150px] sm:max-w-xs truncate flex items-center gap-1.5">${tx.description} ${isCredit ? '<span class="bg-emerald-500/10 text-emerald-400 text-[8px] px-1 py-0.5 rounded border border-emerald-500/10 font-medium tracking-wide uppercase">Ref</span>' : ''}</td>
+                        <td class="py-3.5 px-4 md:px-6 text-right font-semibold whitespace-nowrap ${isCredit ? 'text-emerald-400' : 'text-white'}">${isCredit ? displayAmt.replace('-', '+ ') : displayAmt}</td>
+                        <td class="py-3.5 px-4 md:px-6 text-center"><button onclick="deleteCloudTransaction('${tx.id}')" class="text-neutral-600 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/10 transition-all opacity-100 lg:opacity-0 group-hover:opacity-100 duration-150"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>`;
                     body.appendChild(row);
                 });
             }
@@ -328,23 +330,20 @@
         });
 
         async function deleteCloudTransaction(id) {
+            if(!confirm("Are you sure you want to delete this transaction record?")) return;
             showToast("Purging ledger row...");
             const { error } = await supabaseClient.from('transactions').delete().eq('id', id);
             if(error) { alert("Delete failed"); return; }
             fetchCloudData();
         }
 
-        // 🔐 SECURE AUTH COMPONENT CONTROLLERS
         document.getElementById("login-form").addEventListener("submit", async function(e) {
             e.preventDefault();
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
             const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-            if (error) {
-                alert(`Authentication Rejected: ${error.message}`);
-                return;
-            }
+            if (error) { alert(`Authentication Rejected: ${error.message}`); return; }
             toggleInterfaceVisibility(data.session);
         });
 
@@ -368,8 +367,9 @@
             }
         }
 
-        // 🔮 HIGH-END CURSOR TELEMETRY INTERACTION ENGINE
+        // 🔮 HIGH-END CURSOR & TILT SYSTEM (Bypassed on mobile via check)
         document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 1024) return; // Disable mathematical translation on small viewports for battery efficiency
             const overlay = document.getElementById("login-overlay");
             if (overlay.classList.contains('pointer-events-none')) return;
 
@@ -378,11 +378,9 @@
             const dx = e.clientX - cx;
             const dy = e.clientY - cy;
 
-            // Compute normalized 3D tilt metrics
             const tiltX = (dy / cy) * -22; 
             const tiltY = (dx / cx) * 22; 
 
-            // Target individual background items with individual parallax ratios
             const card = document.getElementById("anchor-card");
             if (card) {
                 card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(40px)`;
@@ -393,7 +391,6 @@
                 card.style.setProperty('--my', `${my}%`);
             }
 
-            // Category Prisms Parallax vectors
             const flight = document.getElementById("vector-flight");
             const cart = document.getElementById("vector-cart");
             const fuel = document.getElementById("vector-fuel");
