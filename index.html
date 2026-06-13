@@ -9,34 +9,120 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #000000; color: #f5f5f7; }
-        .apple-glass { background: rgba(28, 28, 30, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #030303; color: #f5f5f7; overflow-x: hidden; }
+        
+        /* 🍎 PREMIUM APPLE GLASSMORPHISM */
+        .apple-glass { background: rgba(20, 20, 25, 0.4); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.06); }
         .apple-card-gradient { background: linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* 💎 KINETIC BACKGROUND CORE STYLES */
+        .ambient-canvas { perspective: 1200px; overflow: hidden; }
+        
+        /* 💳 TITANIUM METAL CARD STRUCT */
+        .kinetic-metal-card {
+            background: linear-gradient(135deg, #1f1f23 0%, #0d0d0f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .metal-brushed {
+            background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 2px);
+        }
+        .holo-specular {
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.12) 0%, rgba(212, 175, 55, 0.03) 30%, transparent 60%);
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        /* ✨ ABSTRACT ICON ELEMENTS */
+        .floating-vector {
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
     </style>
 </head>
-<body class="min-h-screen antialiased pb-12">
+<body class="min-h-screen antialiased pb-12 select-none">
 
-    <div id="login-overlay" class="fixed inset-0 z-[100] bg-black flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="apple-glass rounded-2xl p-8 max-w-sm w-full space-y-6 shadow-2xl">
+    <!-- 🔒 DESIGNER LOGIN ENVIRONMENT WITH EXPERIMENTAL ANIMATION BACKGROUND -->
+    <div id="login-overlay" class="fixed inset-0 z-[100] ambient-canvas bg-[#050507] flex items-center justify-center p-4 transition-opacity duration-500">
+        
+        <!-- 🌌 DYNAMIC VECTOR FIELD LAYER -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <!-- Ambient Glow Orbs -->
+            <div class="absolute w-[600px] h-[600px] rounded-full bg-blue-900/10 blur-[150px] -top-40 -left-40 animate-pulse" style="animation-duration: 8s;"></div>
+            <div class="absolute w-[500px] h-[500px] rounded-full bg-amber-900/10 blur-[130px] -bottom-20 right-10 animate-pulse" style="animation-duration: 12s;"></div>
+            
+            <!-- 💳 ROTATIONAL TITANIUM CREDIT CARD -->
+            <div id="anchor-card" class="kinetic-metal-card absolute w-[420px] h-[260px] rounded-2xl p-6 hidden md:flex flex-col justify-between left-[12%] top-[28%] metal-brushed overflow-hidden">
+                <div class="absolute inset-0 holo-specular"></div>
+                <div class="relative z-10 flex justify-between items-start">
+                    <div class="w-12 h-10 rounded-lg bg-gradient-to-br from-amber-400/30 to-amber-600/10 border border-amber-400/20 shadow-inner flex items-center justify-center">
+                        <div class="w-8 h-6 rounded bg-amber-400/20 border border-amber-400/30"></div>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">TITANIUM SUITE</span>
+                </div>
+                <div class="relative z-10 space-y-4">
+                    <div class="text-xl font-medium tracking-widest text-neutral-300 opacity-90 font-mono">•••• 5911 •••• 2026</div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-[8px] uppercase tracking-widest text-neutral-500 mb-1">Cardholder</p>
+                            <h4 class="text-sm font-semibold tracking-wide text-neutral-200 uppercase bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">Roshan Tiwari</h4>
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 backdrop-blur-sm"></div>
+                            <div class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/30 backdrop-blur-sm -ml-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🛫 INTERACTIVE TRAVEL/FLIGHT PRISM -->
+            <div id="vector-flight" class="floating-vector hidden lg:block left-[60%] top-[15%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
+                <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="plane" class="w-6 h-6 text-blue-400/40"></i>
+                    <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">ZAPS Airways</p><p class="text-xs font-medium text-white/70 font-mono">RT-782 LAX</p></div>
+                </div>
+            </div>
+
+            <!-- 🛒 PARALLAX WIREFRAME GROCERY SYSTEM -->
+            <div id="vector-cart" class="floating-vector hidden lg:block left-[75%] top-[55%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
+                <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="shopping-cart" class="w-6 h-6 text-emerald-400/40"></i>
+                    <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">Premium Ledger</p><p class="text-xs font-medium text-white/70 font-mono">Roshan Tiwari</p></div>
+                </div>
+            </div>
+
+            <!-- ⛽ KINETIC FUEL/TELEMETRY PRISM -->
+            <div id="vector-fuel" class="floating-vector hidden lg:block left-[20%] top-[72%] text-neutral-800/40 border border-white/5 bg-white/[0.01] px-5 py-4 rounded-2xl backdrop-blur-xs">
+                <div class="flex items-center gap-3 text-neutral-400"><i data-lucide="fuel" class="w-6 h-6 text-amber-400/40"></i>
+                    <div><p class="text-[9px] uppercase tracking-wider text-neutral-500">1.6 TDI Fuel Telemetry</p><p class="text-xs font-medium text-white/70 font-mono">Verified Admin</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🍎 TOP DESIGNER GLASS INTERFACE GATEWAY -->
+        <div class="apple-glass rounded-3xl p-8 max-w-sm w-full space-y-6 shadow-2xl relative z-50 transform hover:scale-[1.01] transition-transform duration-300">
             <div class="text-center space-y-2">
-                <div class="mx-auto w-12 h-12 bg-amber-500 text-black rounded-xl flex items-center justify-center shadow-lg"><i data-lucide="lock" class="w-6 h-6"></i></div>
+                <div class="mx-auto w-12 h-12 bg-white text-black rounded-2xl flex items-center justify-center shadow-xl shadow-white/5"><i data-lucide="fingerprint" class="w-6 h-6 text-neutral-900"></i></div>
                 <h2 class="text-xl font-bold text-white tracking-tight">Cloud Suite Terminal</h2>
                 <p class="text-xs text-neutral-400">Authorized identity access validation required</p>
             </div>
             <form id="login-form" class="space-y-4">
                 <div>
-                    <label class="block text-[11px] font-medium text-neutral-400 uppercase tracking-wider mb-1.5">Email / Identifier</label>
-                    <input type="email" id="login-email" required placeholder="name@domain.com" class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    <label class="block text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Email Terminal ID</label>
+                    <input type="email" id="login-email" required placeholder="name@domain.com" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-medium text-neutral-400 uppercase tracking-wider mb-1.5">Secure Password</label>
-                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    <label class="block text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Secure Password</label>
+                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white transition-colors placeholder-neutral-600">
                 </div>
-                <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-semibold text-sm py-3 rounded-xl transition-all shadow-md active:scale-[0.99] flex items-center justify-center gap-2">Verify Credentials</button>
+                <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-bold text-sm py-3.5 rounded-xl transition-all shadow-lg shadow-white/5 active:scale-[0.99] flex items-center justify-center gap-2 mt-2">Verify Credentials</button>
             </form>
         </div>
     </div>
 
+    <!-- 🌐 LIVE DASHBOARD SUITE (Hidden until Auth passes) -->
     <div id="app-content" class="hidden opacity-0 transition-opacity duration-500">
         <div id="sync-toast" class="fixed bottom-6 right-6 z-50 bg-neutral-900 border border-white/10 text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transition-all opacity-0 pointer-events-none translate-y-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -56,7 +142,7 @@
                     <div class="text-sm text-neutral-400 bg-neutral-900/60 border border-white/5 px-4 py-2 rounded-full flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Protected Sync
                     </div>
-                    <button onclick="handleLogout()" class="text-xs text-neutral-400 hover:text-red-400 bg-white/5 border border-white/5 hover:bg-red-550/10 px-3 py-2 rounded-full transition-all">Sign Out</button>
+                    <button onclick="handleLogout()" class="text-xs text-neutral-400 hover:text-red-400 bg-white/5 border border-white/5 hover:bg-red-500/10 px-3 py-2 rounded-full transition-all">Sign Out</button>
                 </div>
             </div>
         </header>
@@ -117,7 +203,7 @@
                         <table class="w-full text-left border-collapse">
                             <thead>
                                 <tr class="border-b border-white/5 bg-neutral-900/30 text-[11px] uppercase tracking-wider text-neutral-400 font-semibold"><th class="py-4 px-6">Timeline Date</th><th class="py-4 px-6">Card Destination</th><th class="py-4 px-6">Description</th><th class="py-4 px-6 text-right">Value Amount</th><th class="py-4 px-6 text-center">Action</th></tr>
-                             Clyde>
+                            </thead>
                             <tbody id="ledger-body" class="divide-y divide-white/5 text-sm"></tbody>
                         </table>
                         <div id="empty-state" class="hidden p-12 text-center flex flex-col items-center justify-center text-neutral-500 space-y-2"><i data-lucide="cloud-off" class="w-8 h-8 text-neutral-600"></i><p class="text-sm">No authorization records found on this scope.</p></div>
@@ -282,6 +368,41 @@
             }
         }
 
+        // 🔮 HIGH-END CURSOR TELEMETRY INTERACTION ENGINE
+        document.addEventListener('mousemove', (e) => {
+            const overlay = document.getElementById("login-overlay");
+            if (overlay.classList.contains('pointer-events-none')) return;
+
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+
+            // Compute normalized 3D tilt metrics
+            const tiltX = (dy / cy) * -22; 
+            const tiltY = (dx / cx) * 22; 
+
+            // Target individual background items with individual parallax ratios
+            const card = document.getElementById("anchor-card");
+            if (card) {
+                card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(40px)`;
+                const cardRect = card.getBoundingClientRect();
+                const mx = ((e.clientX - cardRect.left) / cardRect.width) * 100;
+                const my = ((e.clientY - cardRect.top) / cardRect.height) * 100;
+                card.style.setProperty('--mx', `${mx}%`);
+                card.style.setProperty('--my', `${my}%`);
+            }
+
+            // Category Prisms Parallax vectors
+            const flight = document.getElementById("vector-flight");
+            const cart = document.getElementById("vector-cart");
+            const fuel = document.getElementById("vector-fuel");
+
+            if (flight) flight.style.transform = `translateX(${dx * 0.04}px) translateY(${dy * 0.04}px) rotateX(${tiltX * 0.3}deg) rotateY(${tiltY * 0.3}deg)`;
+            if (cart) cart.style.transform = `translateX(${dx * -0.05}px) translateY(${dy * -0.05}px) rotateX(${tiltX * -0.2}deg) rotateY(${tiltY * -0.2}deg)`;
+            if (fuel) fuel.style.transform = `translateX(${dx * 0.03}px) translateY(${dy * -0.04}px) rotateX(${tiltX * 0.4}deg) rotateY(${tiltY * 0.4}deg)`;
+        });
+
         document.getElementById("search-ledger").addEventListener("input", (e) => { renderLedger(e.target.value); lucide.createIcons(); });
         document.getElementById("tx-date").value = new Date().toISOString().split('T')[0];
 
@@ -289,11 +410,9 @@
             if (window.supabase && typeof window.supabase.createClient === 'function') {
                 supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 
-                // Read session status instantly on document mount
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 toggleInterfaceVisibility(session);
                 
-                // Track state transitions dynamically
                 supabaseClient.auth.onAuthStateChange((_event, session) => {
                     toggleInterfaceVisibility(session);
                 });
