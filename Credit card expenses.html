@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshan's Expenses</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            color: #f5f5f7;
+        }
+
+        /* Smooth custom glassmorphism */
+        .apple-glass {
+            background: rgba(28, 28, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .apple-card-gradient {
+            background: linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a3c;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased pb-12">
+
+    <header class="sticky top-0 z-50 apple-glass border-b border-white/5 px-6 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-black p-2 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i data-lucide="wallet" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">Roshan's Expenses</h1>
+                    <p class="text-xs text-neutral-400 font-medium tracking-wide">CREDIT SUITE</p>
+                </div>
+            </div>
+            <div class="text-sm text-neutral-400 bg-neutral-900/60 border border-white/5 px-4 py-2 rounded-full flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Personal Dashboard
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Assigned Credit</p>
+                    <h3 class="text-3xl font-bold text-white" id="total-limit">₹5,23,000</h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Net Expenses</p>
+                    <h3 class="text-3xl font-bold text-amber-400" id="total-expenses">₹0</h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                    <i data-lucide="activity" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="apple-glass rounded-2xl p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">Total Available Balance</p>
+                    <h3 class="text-3xl font-bold text-emerald-400" id="total-available">₹5,23,000</h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold tracking-tight text-white flex items-center gap-2">
+                    <i data-lucide="credit-card" class="w-4 h-4 text-neutral-400"></i> Portfolio Cards
+                </h2>
+                <span class="text-xs text-neutral-400" id="card-count">6 Cards Registered</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-grid">
+                </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <section class="lg:col-span-4 apple-glass rounded-2xl p-6 space-y-6 sticky top-28">
+                <div>
+                    <h2 class="text-lg font-semibold tracking-tight text-white">Log Entry</h2>
+                    <p class="text-xs text-neutral-400">Use negative amounts (-) for card payments/refunds</p>
+                </div>
+
+                <form id="transaction-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-300 mb-2">Select Card</label>
+                        <select id="tx-card" required class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                            <option value="HDFC">HDFC Bank</option>
+                            <option value="IDFC">IDFC First Bank</option>
+                            <option value="Super Money">Super Money</option>
+                            <option value="ICICI">ICICI Bank</option>
+                            <option value="One Card">One Card</option>
+                            <option value="Axis Bank">Axis Bank</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-300 mb-2">Amount (₹)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3 text-neutral-500 text-sm">₹</span>
+                            <input type="number" id="tx-amount" step="any" placeholder="e.g. 1500 or -5000" required
+                                class="w-full bg-neutral-900 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <p class="text-[10px] text-neutral-500 mt-1.5">Tip: Type a minus sign first (like <b class="text-neutral-400">-2500</b>) to add a payment or credit refund.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-300 mb-2">Transaction Date</label>
+                        <input type="date" id="tx-date" required
+                            class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-300 mb-2">Description</label>
+                        <input type="text" id="tx-desc" placeholder="e.g., Monthly Bill Payment, Store Refund" required
+                            class="w-full bg-neutral-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+
+                    <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-semibold text-sm py-3 rounded-xl transition-all duration-200 shadow-lg shadow-white/5 active:scale-[0.99] mt-2 flex items-center justify-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Commit Entry
+                    </button>
+                </form>
+            </section>
+
+            <section class="lg:col-span-8 apple-glass rounded-2xl overflow-hidden flex flex-col min-h-[520px]">
+                <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-lg font-semibold tracking-tight text-white">Streamlined Ledger</h2>
+                        <p class="text-xs text-neutral-400">All recorded credit card movements</p>
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-neutral-500"></i>
+                        <input type="text" id="search-ledger" placeholder="Filter descriptions or cards..." 
+                            class="bg-neutral-900 border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-amber-500 w-full sm:w-64 transition-all">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/5 bg-neutral-900/30 text-[11px] uppercase tracking-wider text-neutral-400 font-semibold">
+                                <th class="py-4 px-6">Timeline Date</th>
+                                <th class="py-4 px-6">Card Destination</th>
+                                <th class="py-4 px-6">Description</th>
+                                <th class="py-4 px-6 text-right">Value Amount</th>
+                                <th class="py-4 px-6 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ledger-body" class="divide-y divide-white/5 text-sm">
+                            </tbody>
+                    </table>
+                    <div id="empty-state" class="hidden p-12 text-center flex flex-col items-center justify-center text-neutral-500 space-y-2">
+                        <i data-lucide="layers" class="w-8 h-8 text-neutral-600"></i>
+                        <p class="text-sm">No transactions logged yet.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // Static Card Blueprint Array
+        const cardsBlueprint = {
+            "HDFC": { limit: 103000, theme: "from-blue-600 to-indigo-900" },
+            "IDFC": { limit: 20000, theme: "from-rose-800 to-amber-900" },
+            "Super Money": { limit: 9000, theme: "from-teal-600 to-cyan-900" },
+            "ICICI": { limit: 330000, theme: "from-orange-600 to-amber-900" },
+            "One Card": { limit: 5000, theme: "from-neutral-700 to-neutral-900" },
+            "Axis Bank": { limit: 56000, theme: "from-purple-800 to-indigo-950" }
+        };
+
+        // Reactive Application State
+        let transactions = JSON.parse(localStorage.getItem("roshan_expenses_txs")) || [];
+
+        // Formatting Helpers
+        const formatCurrency = (val) => {
+            const absoluteVal = Math.abs(val);
+            const formatted = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(absoluteVal);
+            return val < 0 ? `-${formatted}` : formatted;
+        };
+
+        const formatDate = (dateStr) => {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        };
+
+        // UI Calculations Engine
+        function recalculateSystem() {
+            let aggregatedExpenses = {};
+            // Reset mappings
+            Object.keys(cardsBlueprint).forEach(c => aggregatedExpenses[c] = 0);
+            
+            // Sum transactions (Both positive expenses and negative credits)
+            transactions.forEach(tx => {
+                if (aggregatedExpenses.hasOwnProperty(tx.card)) {
+                    aggregatedExpenses[tx.card] += parseFloat(tx.amount);
+                }
+            });
+
+            let totalLimit = 0;
+            let totalExpenses = 0;
+
+            // Render Cards UI Array dynamically
+            const cardsGrid = document.getElementById("cards-grid");
+            cardsGrid.innerHTML = "";
+
+            Object.entries(cardsBlueprint).forEach(([cardName, metadata]) => {
+                const spent = aggregatedExpenses[cardName];
+                const available = metadata.limit - spent;
+                const allocationPercentage = Math.max(0, Math.min((spent / metadata.limit) * 100, 100));
+                
+                totalLimit += metadata.limit;
+                totalExpenses += spent;
+
+                const cardMarkup = `
+                    <div class="apple-card-gradient rounded-2xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br ${metadata.theme} opacity-10 group-hover:opacity-15 transition-opacity duration-300"></div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold uppercase tracking-widest text-neutral-400">${cardName}</span>
+                                <i data-lucide="credit-card" class="w-4 h-4 text-neutral-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-neutral-400 uppercase tracking-wider mb-0.5">Available Balance</p>
+                                <h4 class="text-xl font-bold ${available < 0 ? 'text-red-400' : 'text-white'}">${formatCurrency(available)}</h4>
+                            </div>
+                            <div class="space-y-1.5">
+                                <div class="w-full bg-white/10 rounded-full h-1 overflow-hidden">
+                                    <div class="h-full rounded-full transition-all duration-500 ${allocationPercentage > 85 ? 'bg-red-500' : 'bg-emerald-400'}" style="width: ${allocationPercentage}%"></div>
+                                </div>
+                                <div class="flex justify-between text-[11px] text-neutral-400">
+                                    <span>Spent: ${formatCurrency(spent)}</span>
+                                    <span>Limit: ${formatCurrency(metadata.limit)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cardsGrid.insertAdjacentHTML("beforeend", cardMarkup);
+            });
+
+            // Update Global Metrics Top Cards
+            document.getElementById("total-limit").innerText = formatCurrency(totalLimit);
+            document.getElementById("total-expenses").innerText = formatCurrency(totalExpenses);
+            document.getElementById("total-available").innerText = formatCurrency(totalLimit - totalExpenses);
+
+            renderLedger();
+            lucide.createIcons(); // Initialize icons dynamically
+        }
+
+        // Render Ledger / Transaction Matrix Table
+        function renderLedger(filterText = "") {
+            const body = document.getElementById("ledger-body");
+            const emptyState = document.getElementById("empty-state");
+            body.innerHTML = "";
+
+            const filtered = transactions.filter(tx => 
+                tx.description.toLowerCase().includes(filterText.toLowerCase()) ||
+                tx.card.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            // Sort by descending timeline order (newest first)
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove("hidden");
+            } else {
+                emptyState.classList.add("hidden");
+                filtered.forEach(tx => {
+                    const isCredit = parseFloat(tx.amount) < 0;
+                    const displayAmt = formatCurrency(tx.amount);
+                    
+                    const row = document.createElement("tr");
+                    row.className = "hover:bg-white/[0.02] transition-colors duration-150 group";
+                    row.innerHTML = `
+                        <td class="py-4 px-6 text-neutral-300 font-medium">${formatDate(tx.date)}</td>
+                        <td class="py-4 px-6">
+                            <span class="bg-white/5 border border-white/5 px-2.5 py-1 rounded-md text-xs font-medium text-neutral-200">${tx.card}</span>
+                        </td>
+                        <td class="py-4 px-6 text-neutral-400 max-w-xs truncate flex items-center gap-2">
+                            ${tx.description}
+                            ${isCredit ? '<span class="bg-emerald-500/10 text-emerald-400 text-[9px] px-1.5 py-0.5 rounded border border-emerald-500/20 font-medium tracking-wide uppercase">Payment/Refund</span>' : ''}
+                        </td>
+                        <td class="py-4 px-6 text-right font-semibold ${isCredit ? 'text-emerald-400' : 'text-white'}">
+                            ${isCredit ? displayAmt.replace('-', '+ ') : displayAmt}
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <button onclick="deleteTransaction('${tx.id}')" class="text-neutral-600 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100 duration-150" title="Purge Record">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    `;
+                    body.appendChild(row);
+                });
+            }
+        }
+
+        // Action Handlers
+        document.getElementById("transaction-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const newTx = {
+                id: 'tx_' + Math.random().toString(36).substr(2, 9),
+                card: document.getElementById("tx-card").value,
+                amount: parseFloat(document.getElementById("tx-amount").value),
+                date: document.getElementById("tx-date").value,
+                description: document.getElementById("tx-desc").value
+            };
+
+            transactions.push(newTx);
+            localStorage.setItem("roshan_expenses_txs", JSON.stringify(transactions));
+            
+            // Reset input UI fields cleanly
+            document.getElementById("tx-amount").value = "";
+            document.getElementById("tx-desc").value = "";
+            
+            recalculateSystem();
+        });
+
+        // Delete Row Action
+        function deleteTransaction(id) {
+            transactions = transactions.filter(t => t.id !== id);
+            localStorage.setItem("roshan_expenses_txs", JSON.stringify(transactions));
+            recalculateSystem();
+        }
+
+        // Live filtration matching search input
+        document.getElementById("search-ledger").addEventListener("input", function(e) {
+            renderLedger(e.target.value);
+            lucide.createIcons();
+        });
+
+        // Initialize Native Default Date as Today
+        document.getElementById("tx-date").value = new Date().toISOString().split('T')[0];
+
+        // Initial Boot sequence
+        recalculateSystem();
+    </script>
+</body>
+</html>
