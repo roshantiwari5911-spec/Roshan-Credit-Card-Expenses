@@ -211,6 +211,9 @@
             "Axis Bank": { limit: 56000, theme: "from-purple-800 to-indigo-950" }
         };
 
+        const SUPABASE_URL = "https://tcxmvximermofhnbvvtg.supabase.co"; 
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjeG12eGltZXJtb2ZobmJ2dnRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNjU4MzQsImV4cCI6MjA5Njk0MTgzNH0.YfgxM4CyAoByA3QGJaBqxK6coVU0p7Rg6AJFTG0ZaHQ";
+
         let transactions = JSON.parse(localStorage.getItem("roshan_expenses_txs")) || [];
 
         function exportSystemData() {
